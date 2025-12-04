@@ -59,9 +59,14 @@ void atencao(char texto[]){
     printf("\033[1;33m%s\033[0m",texto);    // 33 amarelo
 }
 
-void clear(){
-    system("clear"); // apaga tela (funciona para linux apenas)
+void clear() {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
 }
+
 
 void limpa_buffer(int r){               // não permitir caracter não numérica
     if(r==0){                           // esse r recebe: 1 se foi lido corretamente, 0 se não
