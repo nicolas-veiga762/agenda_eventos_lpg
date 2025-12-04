@@ -19,7 +19,7 @@ int menu(){
         printf("\n\n[Escolha uma opção]: ");
         r = scanf("%d",&i);                    
         limpa_buffer(r);
-    }while(i < 1 || i > 9);
+    }while(i < 1 || i > 6);
 
     return i;
 }
@@ -52,7 +52,7 @@ void atencao(char texto[]){
 }
 
 void clear(){
-    system("clear");
+    system("clear"); // apaga tela (funciona para linux apenas)
 }
 
 void limpa_buffer(int r){               // não permitir caracter não numérica

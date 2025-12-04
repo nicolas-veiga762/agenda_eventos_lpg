@@ -7,26 +7,29 @@ int main(int argc, char const *argv[])
     int n;
     Evento *e;
 
-    FILE *f = fopen("/home/infantaria/Desktop/UDESC/LPG/TRABALHOS/TRABALHO_STRUCT/agenda.txt", "rt");
+    FILE *f = fopen("./agenda.txt", "rt");
     if( f == NULL ){
-        printf("Erro no arquivo!\n");
-        return 1; // Saindo do programa.
+        printf("Arquivo inexistente!\n");
+        e = NULL;
+        n = 0;
     }
-    fscanf( f , "%d", &n);
-    printf("Quantidade %d lida...\n", n);
+    else{
+
+        fscanf( f , "%d", &n);
+        printf("Quantidade %d lida...\n", n);
+
+        e = malloc( sizeof(Evento) * n );
     
-    e = malloc( sizeof(Evento) * n );
-
-    for(int i = 0 ; i < n ; i++ ){
-        fscanf(f, "%d %d %d", &e[i].data.dia, &e[i].data.mes, &e[i].data.ano );
-        fscanf(f, "%d %d", &e[i].horario_inicio.hora,&e[i].horario_inicio.minuto);
-        fscanf(f, "%d %d", &e[i].horario_fim.hora,&e[i].horario_fim.minuto);
-        fscanf(f, " %49[^\n]", e[i].descricao);
-        fscanf(f, " %49[^\n]", e[i].local);
+        for(int i = 0 ; i < n ; i++ ){
+            fscanf(f, "%d %d %d", &e[i].data.dia, &e[i].data.mes, &e[i].data.ano );
+            fscanf(f, "%d %d", &e[i].horario_inicio.hora,&e[i].horario_inicio.minuto);
+            fscanf(f, "%d %d", &e[i].horario_fim.hora,&e[i].horario_fim.minuto);
+            fscanf(f, " %49[^\n]", e[i].descricao);
+            fscanf(f, " %49[^\n]", e[i].local);
+        }
+        fclose( f );
     }
-
-    fclose( f );
-
+    
     /*
     
     *DISCLAIMER!

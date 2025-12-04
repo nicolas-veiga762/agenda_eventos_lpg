@@ -105,9 +105,9 @@ void le_hora_inicio(int n, int r, Evento *vetor ){
                 
                 int w = data_mais_antiga(&vetor[n-1].data, &vetor[i].data);
                 
-                if(w == 2){
+                if(w == 2){ // ocorrem eventos nesse dia
                     if(hora_mais_antiga(evento_atual_inicio, &vetor[i].horario_inicio) == 1 ||
-                       hora_mais_antiga(&vetor[i].horario_fim, evento_atual_inicio) == 1){
+                       hora_mais_antiga(&vetor[i].horario_fim, evento_atual_inicio) != 0){
         
                         ;
 
@@ -152,7 +152,7 @@ void le_hora_fim(int n, int r, Evento *vetor ){
                 scanf("%d", &evento_atual_fim->minuto);
             }while(v_minuto(evento_atual_fim->minuto)!=0);
             
-            if(hora_mais_antiga(evento_atual_fim, evento_atual_inicio) == 1 ){
+            if(hora_mais_antiga(evento_atual_fim, evento_atual_inicio) != 0 ){
                 erro("\tHorário de termino invalido! Deve ser depois do horário de inicio!\n");
             }
             else{
@@ -165,7 +165,7 @@ void le_hora_fim(int n, int r, Evento *vetor ){
                 if(w == 2){
                     //atencao("\nVAI VERIFICAR\n");
                     if(hora_mais_antiga(evento_atual_inicio, &vetor[i].horario_inicio) == 1){ // o evento atual começa antes do evento já existente
-                        if(hora_mais_antiga(evento_atual_fim, &vetor[i].horario_inicio) == 1){
+                        if(hora_mais_antiga(evento_atual_fim, &vetor[i].horario_inicio) != 0){
                             //sucesso("\tdeu certo\n");
                             ;
                         }
@@ -190,7 +190,7 @@ void le_hora_fim(int n, int r, Evento *vetor ){
                             }
                             else{
                                 vira = 1;
-                                erro("\tpqp como tu conseguiu esse erro? kkkkkkkkk\n");
+                                erro("\tpqp como tu conseguiu esse erro? kkkkkkkkk\n"); // situação impossível - se quiser pode apagar esse else
                             }
                         }
                     }
@@ -465,9 +465,9 @@ int remover_evento(int n, Evento **e){
             }
             n--;
             *e = realloc(*e,sizeof(Evento)*n);
+            sucesso("\nEvento removido com sucesso...");
+            segura();
         }
-        sucesso("\nEvento removido com sucesso...");
-        segura();
 
     }
     return n;
@@ -477,7 +477,7 @@ int remover_evento(int n, Evento **e){
 void sair_do_sistema(int n, Evento *e){
 
 
-    FILE *f = fopen("/home/infantaria/Desktop/UDESC/LPG/TRABALHOS/TRABALHO_STRUCT/agenda.txt", "wt");
+    FILE *f = fopen("./agenda.txt", "wt");
     if( f == NULL ){
         printf("Erro no arquivo!\n");
         segura();
