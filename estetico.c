@@ -1,9 +1,17 @@
 #include "funcoes.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
 
 ////////////////////////////////////////////// ESTÉTICO
+
+#ifdef _WIN32
+    #include <windows.h>
+    #define sleep_ms(x) Sleep(x)
+#else
+    #include <unistd.h>
+    #define sleep_ms(x) usleep((x) * 1000)
+#endif
+
 int menu(){
     int i,r;
     do{
@@ -27,7 +35,7 @@ int menu(){
 void carregando(){
     for(int i = 0; i < 4; i++){
         printf(" .");
-        Sleep(400);
+        sleep_ms(400);
         fflush(stdout);    // força a impressão imediata
     }
     printf("\n");
