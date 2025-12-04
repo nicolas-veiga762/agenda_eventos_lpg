@@ -1,7 +1,7 @@
 #include "funcoes.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <windows.h>
 
 ////////////////////////////////////////////// ESTÉTICO
 int menu(){
@@ -27,7 +27,7 @@ int menu(){
 void carregando(){
     for(int i = 0; i < 4; i++){
         printf(" .");
-        usleep(400000);    // microssegundos, 0.4 seg
+        Sleep(400);
         fflush(stdout);    // força a impressão imediata
     }
     printf("\n");
